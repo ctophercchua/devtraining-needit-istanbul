@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_58872_needit.dupTasks</api_name>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>dupTasks</name>
+        <script><![CDATA[var dupTasks = Class.create();
+dupTasks.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+	dupTasks: function() {
+		var dupRecords = [];
+		var gaDupCheck1 = new GlideAggregate('task');
+		gaDupCheck1.addAggregate('COUNT', 'number');
+		gaDupCheck1.groupBy('number');
+		gaDupCheck1.addHaving('COUNT', '>', 1);
+		gaDupCheck1.query();
+		while (gaDupCheck1.next()) {
+			dupRecords.push(gaDupCheck1.number.toString());
+		}
+		return dupRecords;
+	},
+	
+type: 'dupTasks'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>chris_admin</sys_created_by>
+        <sys_created_on>2017-05-25 07:45:13</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>d69babf7db323200b78ff8fdbf9619fb</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>dupTasks</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_include_d69babf7db323200b78ff8fdbf9619fb</sys_update_name>
+        <sys_updated_by>chris_admin</sys_updated_by>
+        <sys_updated_on>2017-05-26 11:16:16</sys_updated_on>
+    </sys_script_include>
+</record_update>
